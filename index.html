@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo Já - Gerador de Documentos Online</title>
+    <meta name="description"
+        content="Crie e imprima recibos, notas promissórias e vales online de forma simples e rápida. Ideal para quem precisa de documentos sem complicações.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#info">Como Funciona</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-logo">
+                <img src="./ChatGPT Image 21 de jul. de 2025, 20_20_59.png" alt="Logo do Header">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Pronto em um Clique!</h1>
+                <p>Crie e imprima recibos, promissórias e vales com rapidez e facilidade usando nosso gerador simples e intuitivo.</p>
+                <a href="#generator" class="btn btn-primary">Começar Agora</a>
+            </div>
+        </section>
+
+               <section id="generator" class="generator-section">
+            <div class="container">
+                <h2>Gerador de Documentos</h2>
+
+                <div class="select-document-type">
+                    <label for="documentType">Selecione o Tipo de Documento:</label>
+                    <select id="documentType" onchange="showDocumentForm()">
+                        <option value="">-- Selecione --</option>
+                        <option value="simpleReceipt">Recibo Simples</option>
+                        <option value="salaryReceipt">Recibo de Salário</option>
+                        <option value="rentReceipt">Recibo de Aluguel</option>
+                        <option value="promissoryNote">Nota Promissória</option>
+                        <option value="voucher">Vale</option>
+                    </select>
+                </div>
+
+                <div id="simpleReceiptForm" class="document-form hidden">
+                    <h3>Dados do Recibo Simples</h3>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="simple_valor">Valor (R$):</label>
+                            <input type="text" id="simple_valor" placeholder="Ex: 150,00" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="simple_beneficiario">Emitente:</label>
+                            <input type="text" id="simple_beneficiario" placeholder="Nome Completo do Emitente" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="simple_referencia">Referência (o que está sendo pago):</label>
+                            <input type="text" id="simple_referencia" placeholder="Ex: Pagamento de serviço de TI" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="simple_data">Data:</label>
+                            <input type="date" id="simple_data" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="simple_cidade">Cidade:</label>
+                            <input type="text" id="simple_cidade" placeholder="Ex: Rio de Janeiro" value="Rio de Janeiro" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="simple_emitente">Nome do Beneficiário:</label>
+                            <input type="text" id="simple_emitente" placeholder="Seu Nome Completo" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="simple_documentoEmitente">CPF/CNPJ do Beneficiário:</label>
+                            <input type="text" id="simple_documentoEmitente" placeholder="Apenas números">
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" onclick="gerarReciboSimples()">Gerar Recibo</button>
+                </div>
+
+                <div id="salaryReceiptForm" class="document-form hidden">
+                    <h3>Dados do Recibo de Salário</h3>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="salary_periodo">Período de Referência:</label>
+                            <input type="text" id="salary_periodo" placeholder="Ex: 01/07/2025 a 31/07/2025" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_nomeFuncionario">Nome do Funcionário:</label>
+                            <input type="text" id="salary_nomeFuncionario" placeholder="Nome Completo do Funcionário" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_cpfFuncionario">CPF do Funcionário:</label>
+                            <input type="text" id="salary_cpfFuncionario" placeholder="Apenas números">
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_cargo">Cargo:</label>
+                            <input type="text" id="salary_cargo" placeholder="Ex: Desenvolvedor Front-end">
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_salarioBase">Salário Base (R$):</label>
+                            <input type="text" id="salary_salarioBase" placeholder="Ex: 2500,00" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_horasExtras">Horas Extras (R$):</label>
+                            <input type="text" id="salary_horasExtras" value="0,00">
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_comissoes">Comissões (R$):</label>
+                            <input type="text" id="salary_comissoes" value="0,00">
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_outrosAdicionais">Outros Adicionais (R$):</label>
+                            <input type="text" id="salary_outrosAdicionais" value="0,00">
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_inss">INSS (R$):</label>
+                            <input type="text" id="salary_inss" value="0,00">
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_irrf">IRRF (R$):</label>
+                            <input type="text" id="salary_irrf" value="0,00">
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_outrosDescontos">Outros Descontos (R$):</label>
+                            <input type="text" id="salary_outrosDescontos" value="0,00">
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_dataPagamento">Data do Pagamento:</label>
+                            <input type="date" id="salary_dataPagamento" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_cidade">Cidade:</label>
+                            <input type="text" id="salary_cidade" placeholder="Ex: Rio de Janeiro" value="Rio de Janeiro" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_nomeEmpresa">Nome da Empresa:</label>
+                            <input type="text" id="salary_nomeEmpresa" placeholder="Nome Completo da Empresa" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="salary_cnpjEmpresa">CNPJ da Empresa:</label>
+                            <input type="text" id="salary_cnpjEmpresa" placeholder="Apenas números">
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" onclick="gerarReciboSalario()">Gerar Recibo</button>
+                </div>
+
+                <div id="rentReceiptForm" class="document-form hidden">
+                    <h3>Dados do Recibo de Aluguel</h3>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="rent_periodo">Período de Referência:</label>
+                            <input type="text" id="rent_periodo" placeholder="Ex: Julho/2025" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_valorAluguel">Valor do Aluguel (R$):</label>
+                            <input type="text" id="rent_valorAluguel" placeholder="Ex: 1200,00" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_valorCondominio">Valor do Condomínio (R$):</label>
+                            <input type="text" id="rent_valorCondominio" value="0,00">
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_valorIptu">Valor do IPTU (R$):</label>
+                            <input type="text" id="rent_valorIptu" value="0,00">
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_outrosAcrescimos">Outros Acréscimos (R$):</label>
+                            <input type="text" id="rent_outrosAcrescimos" value="0,00">
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_nomeLocatario">Nome do Locatário:</label>
+                            <input type="text" id="rent_nomeLocatario" placeholder="Nome Completo do Locatário" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_documentoLocatario">CPF/CNPJ do Locatário:</label>
+                            <input type="text" id="rent_documentoLocatario" placeholder="Apenas números">
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_enderecoImovel">Endereço do Imóvel:</label>
+                            <input type="text" id="rent_enderecoImovel" placeholder="Endereço Completo do Imóvel" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_dataPagamento">Data do Pagamento:</label>
+                            <input type="date" id="rent_dataPagamento" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_nomeLocador">Nome do Locador:</label>
+                            <input type="text" id="rent_nomeLocador" placeholder="Seu Nome Completo" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="rent_documentoLocador">CPF/CNPJ do Locador:</label>
+                            <input type="text" id="rent_documentoLocador" placeholder="Apenas números">
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" onclick="gerarReciboAluguel()">Gerar Recibo</button>
+                </div>
+
+                <div id="promissoryNoteForm" class="document-form hidden">
+                    <h3>Dados da Nota Promissória</h3>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="note_valor">Valor (R$):</label>
+                            <input type="text" id="note_valor" placeholder="Ex: 500,00" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="note_dataEmissao">Data de Emissão:</label>
+                            <input type="date" id="note_dataEmissao" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="note_dataVencimento">Data de Vencimento:</label>
+                            <input type="date" id="note_dataVencimento" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="note_nomeEmitente">Nome do Emitente:</label>
+                            <input type="text" id="note_nomeEmitente" placeholder="Seu Nome Completo" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="note_documentoEmitente">CPF/CNPJ do Emitente:</label>
+                            <input type="text" id="note_documentoEmitente" placeholder="Apenas números">
+                        </div>
+                        <div class="input-group">
+                            <label for="note_enderecoEmitente">Endereço do Emitente:</label>
+                            <input type="text" id="note_enderecoEmitente" placeholder="Endereço Completo do Emitente" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="note_nomeBeneficiario">Nome do Beneficiário:</label>
+                            <input type="text" id="note_nomeBeneficiario" placeholder="Nome Completo do Beneficiário" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="note_documentoBeneficiario">CPF/CNPJ do Beneficiário:</label>
+                            <input type="text" id="note_documentoBeneficiario" placeholder="Apenas números">
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" onclick="gerarNotaPromissoria()">Gerar Nota Promissória</button>
+                </div>
+
+                <div id="voucherForm" class="document-form hidden">
+                    <h3>Dados do Vale</h3>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="voucher_valor">Valor (R$):</label>
+                            <input type="text" id="voucher_valor" placeholder="Ex: 50,00" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="voucher_beneficiario">Beneficiário:</label>
+                            <input type="text" id="voucher_beneficiario" placeholder="Nome Completo do Beneficiário" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="voucher_referencia">Referência (motivo do vale):</label>
+                            <input type="text" id="voucher_referencia" placeholder="Ex: Vale transporte" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="voucher_data">Data:</label>
+                            <input type="date" id="voucher_data" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="voucher_cidade">Cidade:</label>
+                            <input type="text" id="voucher_cidade" placeholder="Ex: Rio de Janeiro" value="Rio de Janeiro" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="voucher_emitente">Nome do Emitente:</label>
+                            <input type="text" id="voucher_emitente" placeholder="Seu Nome Completo" required>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" onclick="gerarVale()">Gerar Vale</button>
+                </div>
+
+                <div class="receipt-preview">
+                    <h3 class="section-title">Prévia do Documento</h3>
+                    <div id="documentContent" class="receipt-content">
+                        <p class="center-text">Selecione um tipo de documento e preencha os dados para visualizar.</p>
+                    </div>
+                    <button id="printButton" class="btn btn-print hidden">Imprimir Documento</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="info" class="info-section">
+            <div class="container">
+                <h2 class="section-title">Como Funciona?</h2>
+                <div class="info-steps">
+                    <div class="step-card">
+                        <h3>1. Escolha o Tipo</h3>
+                        <p>Selecione o documento que deseja gerar (recibo, nota promissória ou vale) no menu suspenso.</p>
+                    </div>
+                    <div class="step-card">
+                        <h3>2. Preencha os Dados</h3>
+                        <p>Insira as informações necessárias nos campos do formulário correspondente.</p>
+                    </div>
+                    <div class="step-card">
+                        <h3>3. Gere e Imprima</h3>
+                        <p>Clique em "Gerar Documento" para visualizar e depois em "Imprimir Documento" para ter seu documento pronto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="./ChatGPT Image 21 de jul. de 2025, 20_20_59.png" alt="Logo do Footer">
+                </div>
+                <div class="footer-text">
+                    <p>&copy; 2025 ReciboJá - Gerador de Recibos. Todos os direitos reservados.</p>
+                    <p>Desenvolvido por <a href="https://www.linkedin.com/in/josesantanas" target="_blank">Code&Go®</a></p>
+                    <p><a href="mailto:reciboja0@gmail.com">suporte@reciboja.com</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
